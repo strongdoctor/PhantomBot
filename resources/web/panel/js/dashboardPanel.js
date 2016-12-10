@@ -363,6 +363,24 @@
         return panelStrcmp(a.key, b.key);
     }
 
+    /**
+    * @function toggleModule
+    * @param {String} module
+    */
+    function toggleModule(module, idx) {
+        var el = $('#moduleStatus_' + idx);
+
+        if(el.hasClass("enabled")) {
+            //If the module is getting disabled
+            el.addClass("switchingstate");
+            disableModule(module, idx);
+        } else {
+            //If the module is getting enabled
+            el.addClass("switchingstate");
+            enableModule(module, idx);
+        }
+    }
+
     /** 
      * @function enableModule
      * @param {String} module

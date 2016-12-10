@@ -119,19 +119,20 @@
             }
 
             if (panelCheckQuery(msgObject, 'commands_cooldownmsg')) {
-                if (msgObject['results']['coolDownMsgEnabled'] != null && msgObject['results']['coolDownMsgEnabled'] != undefined) {
+                if (typeof msgObject['results']['coolDownMsgEnabled'] !== 'null' && typeof msgObject['results']['coolDownMsgEnabled'] !== 'undefined') {
                     cooldownMsg = msgObject['results']['coolDownMsgEnabled'];
                 }
             }
 
             if (panelCheckQuery(msgObject, 'commands_permcommsg')) {
-                if (msgObject['results']['permComMsgEnabled'] != null && msgObject['results']['permComMsgEnabled'] != undefined) {
+                if (typeof msgObject['results']['permComMsgEnabled'] !== 'null' && typeof msgObject['results']['permComMsgEnabled'] !== 'undefined') {
                     permcomMsg = msgObject['results']['permComMsgEnabled'];
                 }
             }
 
             $("#cooldownMsg").html(modeIcon[cooldownMsg]);
-            $("#permcomMsg").html(modeIcon[permcomMsg]);
+
+            updateToggleButton("#permcomMsg",permcomMsg)
 
             if (panelCheckQuery(msgObject, 'commands_commands')) {
                 if (msgObject['results'].length === 0) {
@@ -585,7 +586,8 @@
      * @function togglePermcomMsg
      */
     function togglePermcomMsg() {
-        $("#permcomMsg").html("<i style=\"color: #6136b1\" class=\"fa fa-spinner fa-spin\" />");
+        $("#permcomMsg").addClass("switchingstate");
+
         if (permcomMsg == "true") {
             sendDBUpdate("commands_permcommsg", "settings", "permComMsgEnabled", "false");
         } else if (permcomMsg == "false") {
@@ -704,6 +706,19 @@
         sendCommand(val);
         $('#commandImput').val('command sent!');
         setTimeout(function() { $('#commandImput').val('') }, TIMEOUT_WAIT_TIME);
+    }
+
+    /**
+    * @function updateToggleButton
+    */
+
+    function updateToggleButton(buttonIdentifier, bool) {
+        var button = $(buttonIdentifier);
+        if(bool == 'true' || bool == true) {
+            button.attr('class', 'togglebutton enabled');
+        } else {
+            button.attr('class', 'togglebutton disabled');
+        }
     }
 
     // Import the HTML file for this panel.

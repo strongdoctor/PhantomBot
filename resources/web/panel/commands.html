@@ -174,11 +174,15 @@
         <table>
             <tr class="textList">
                 <td>No permission warning message</td>
-                <td style="width: 25px"><div id="permcomMsg" /></td>
-                <td style="width: 25px">
-                    <div data-toggle="tooltip" title="Toggle" class="button"
-                         onclick="$.togglePermcomMsg();"><i class="fa fa-refresh" />
-                     </div>
+                <td width="60px">
+                    <div id="permcomMsg" class="togglebutton disabled" onclick="$.togglePermcomMsg();">
+                        <div class="togglebuttoninside spinner">
+                            <i class="fa fa-spinner fa-pulse fa-lg fa-fw"></i>
+                        </div>
+                        <div class="togglebuttoninside toggleball">
+                            <i class="fa fa-circle fa-lg fa-fw" aria-hidden="true"></i>
+                        </div>
+                    </div>
                 </td>
             </tr>
         </table>
